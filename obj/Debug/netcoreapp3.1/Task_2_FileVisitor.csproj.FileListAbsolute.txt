@@ -1,0 +1,13 @@
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\obj\Debug\netcoreapp3.1\Task_2_FileVisitor.csprojAssemblyReference.cache
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\obj\Debug\netcoreapp3.1\Task_2_FileVisitor.AssemblyInfoInputs.cache
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\obj\Debug\netcoreapp3.1\Task_2_FileVisitor.AssemblyInfo.cs
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\obj\Debug\netcoreapp3.1\Task_2_FileVisitor.csproj.CoreCompileInputs.cache
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\bin\Debug\netcoreapp3.1\Task_2_FileVisitor.exe
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\bin\Debug\netcoreapp3.1\Task_2_FileVisitor.deps.json
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\bin\Debug\netcoreapp3.1\Task_2_FileVisitor.runtimeconfig.json
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\bin\Debug\netcoreapp3.1\Task_2_FileVisitor.runtimeconfig.dev.json
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\bin\Debug\netcoreapp3.1\Task_2_FileVisitor.dll
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\bin\Debug\netcoreapp3.1\Task_2_FileVisitor.pdb
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\obj\Debug\netcoreapp3.1\Task_2_FileVisitor.dll
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\obj\Debug\netcoreapp3.1\Task_2_FileVisitor.pdb
+C:\Users\Kirill_Mityushchenko\source\repos\Task_2_FileVisitor\Task_2_FileVisitor\obj\Debug\netcoreapp3.1\Task_2_FileVisitor.genruntimeconfig.cache
