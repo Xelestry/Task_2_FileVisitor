@@ -13,10 +13,10 @@ namespace Task_2_FileVisitor
 
         private event EventHandler<EventArgs> VisitStarted;
         private event EventHandler<EventArgs> VisitFinished;
-        private event EventHandler<DirectoryEventArgs> FilteredFileFound;
-        private event EventHandler<DirectoryEventArgs> FilteredDirectoryFound;
-        private event EventHandler<DirectoryEventArgs> FileFound;
-        private event EventHandler<DirectoryEventArgs> DirectoryFound;
+        private event EventHandler<PathEventArgs> FilteredFileFound;
+        private event EventHandler<PathEventArgs> FilteredDirectoryFound;
+        private event EventHandler<PathEventArgs> FileFound;
+        private event EventHandler<PathEventArgs> DirectoryFound;
 
         public FileVisitor(string root)
         {
@@ -63,6 +63,35 @@ namespace Task_2_FileVisitor
             }
         }
 
+        private IEnumerable<string> VisitDirectory(string root)
+        {
+            foreach (var file in VisitFiles(root))
+            {
+                yield return file;
+            }
+
+            foreach (var subDirectory in Directory.EnumerateDirectories(root))
+            {
+                var directoryEventArgs = new PathEventArgs { Path = subDirectory };
+
+                OnDirectoryFound(directoryEventArgs);
+
+                if (_filter(subDirectory))
+                {
+                    var filteredDirectoryEventArgs = new PathEventArgs { Path = subDirectory };
+
+                    OnFilteredDirectoryFound(directoryEventArgs);
+
+                    yield return subDirectory;
+                }
+
+                foreach (var item in VisitDirectory(subDirectory))
+                {
+                    yield return item;
+                }
+            }
+        }
+
         private IEnumerable<string> VisitFile(string root)
         {
             if (root == null)
@@ -80,75 +109,20 @@ namespace Task_2_FileVisitor
             OnVisitFinished(new EventArgs());
         }
 
-        private IEnumerable<string> VisitDirectory(string root)
-        {
-            foreach (var file in VisitFiles(root))
-            {
-                yield return file;
-            }
-
-            foreach (var subDirectory in Directory.EnumerateDirectories(root))
-            {
-                var directoryEventArgs = new DirectoryEventArgs { Path = subDirectory };
-
-                OnDirectoryFound(directoryEventArgs);
-
-                if (directoryEventArgs.Stop)
-                {
-                    yield break;
-                }
-
-                if (!directoryEventArgs.Exclude && _filter(subDirectory))
-                {
-                    var filteredDirectoryEventArgs = new DirectoryEventArgs { Path = subDirectory };
-
-                    OnFilteredDirectoryFound(directoryEventArgs);
-
-                    if (filteredDirectoryEventArgs.Stop)
-                    {
-                        yield break;
-                    }
-
-                    if (!filteredDirectoryEventArgs.Exclude)
-                    {
-                        yield return subDirectory;
-                    }
-                }
-
-                foreach (var item in VisitDirectory(subDirectory))
-                {
-                    yield return item;
-                }
-            }
-        }
-
         private IEnumerable<string> VisitFiles(string root)
         {
             foreach (var file in Directory.EnumerateFiles(root))
             {
-                var fileEventArgs = new DirectoryEventArgs { Path = file };
+                var fileEventArgs = new PathEventArgs { Path = file };
 
                 OnFileFound(fileEventArgs);
 
-                if (fileEventArgs.Stop)
+                if (_filter(file))
                 {
-                    yield break;
-                }
-
-                if (!fileEventArgs.Exclude && _filter(file))
-                {
-                    var filteredFileEventArgs = new DirectoryEventArgs { Path = file };
+                    var filteredFileEventArgs = new PathEventArgs { Path = file };
                     OnFilteredFileFound(filteredFileEventArgs);
 
-                    if (filteredFileEventArgs.Stop)
-                    {
-                        yield break;
-                    }
-
-                    if (!filteredFileEventArgs.Exclude)
-                    {
-                        yield return file;
-                    }
+                    yield return file;
                 }
             }
         }
@@ -173,22 +147,22 @@ namespace Task_2_FileVisitor
             VisitFinished?.Invoke(this, args);
         }
 
-        private void OnFileFound(DirectoryEventArgs args)
+        private void OnFileFound(PathEventArgs args)
         {
             FileFound?.Invoke(this, args);
         }
 
-        private void OnDirectoryFound(DirectoryEventArgs args)
+        private void OnDirectoryFound(PathEventArgs args)
         {
             DirectoryFound?.Invoke(this, args);
         }
 
-        private void OnFilteredFileFound(DirectoryEventArgs args)
+        private void OnFilteredFileFound(PathEventArgs args)
         {
             FilteredFileFound?.Invoke(this, args);
         }
 
-        private void OnFilteredDirectoryFound(DirectoryEventArgs args)
+        private void OnFilteredDirectoryFound(PathEventArgs args)
         {
             FilteredDirectoryFound?.Invoke(this, args);
         }
